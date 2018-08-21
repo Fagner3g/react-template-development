@@ -1,5 +1,6 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
     devtool: 'source-map',
@@ -10,7 +11,8 @@ module.exports = {
     },
     devServer: {
         port: 8080,
-        contentBase: './public'
+        contentBase: './public',
+        hot: true
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -23,12 +25,9 @@ module.exports = {
             {
                 test: /\.js[x]$/,
                 exclude: /node_modules/,
+                include: /src/,
                 use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["react"],
-                        plugins: ["babel-plugin-transform-object-rest-spread"]
-                    }
+                    loader: "babel-loader"
                 }
             },
             {
@@ -46,5 +45,6 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("app.css"),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };

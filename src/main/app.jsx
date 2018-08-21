@@ -5,6 +5,6 @@ import React from 'react'
 
 export default () => (
     <div className='jumbotron'>
-        <h4>Template Padrão bootstrap 4.1 e Font-awesome</h4>
+        <h4>Template Padrão bootstrap 4.0 e Font-awesome</h4>
     </div>
 )
