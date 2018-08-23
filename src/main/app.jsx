@@ -1,10 +1,9 @@
-import 'modules/bootstrap/dist/css/bootstrap.min.css'
-import 'modules/font-awesome/css/font-awesome.min.css'
-
 import React from 'react'
+import '../assets/css/app.css'
+
 
 export default () => (
     <div className='jumbotron'>
-        <h4>Template Padrão bootstrap 4.0 e Font-awesome</h4>
+        <h4>Template Padrão</h4>
     </div>
 )

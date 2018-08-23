@@ -1,13 +1,15 @@
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+const HtmlPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     devtool: 'source-map',
     entry: path.join(__dirname, 'src', 'index'),
     output: {
         path: path.join(__dirname, 'public'),
-        filename: './app.js'
+        filename: '[name]-[hash].js',
+        publicPath: ''
     },
     devServer: {
         port: 8080,
@@ -26,25 +28,29 @@ module.exports = {
                 test: /\.js[x]$/,
                 exclude: /node_modules/,
                 include: /src/,
-                use: {
-                    loader: "babel-loader"
-                }
+                loader: 'babel-loader'
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
+                exclude: /node_modules/,
+                include: /src/,
+                loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader"
                 })
             },
             {
                 test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
-                loaders: 'file-loader'
+                loader: 'file-loader'
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin("app.css"),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('[name]-[hash].css'),
+        new HtmlPlugin({
+            title: 'Template Padrão',
+            template: path.join(__dirname, 'src', 'html', 'template.html')
+        })
     ]
 };
