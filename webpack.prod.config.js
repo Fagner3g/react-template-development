@@ -4,12 +4,10 @@ const HtmlPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    devtool: 'source-map',
     entry: path.join(__dirname, 'src', 'index'),
     output: {
         path: path.join(__dirname, 'public'),
-        filename: '[name]-[hash].js',
-        publicPath: ''
+        filename: '[name]-[hash].js'
     },
     devServer: {
         port: 8080,
@@ -34,7 +32,10 @@ module.exports = {
                 test: /\.css$/,
                 exclude: /node_modules/,
                 include: /src/,
-                loaders: ["style-loader", "css-loader"]
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
             {
                 test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
@@ -43,8 +44,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin('[name]-[hash].css'),
+        new webpack.DefinePlugin({
+            'precess.env': {
+                'NODE_ENV': '"production'
+            }
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new HtmlPlugin({
             title: 'Template Padrão',
             template: path.join(__dirname, 'src', 'html', 'template.html')
