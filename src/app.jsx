@@ -1,5 +1,5 @@
 import React from 'react'
-import Default from './components/default'
+import Default from 'components/default'
 
 const App = () => (
     <div>
