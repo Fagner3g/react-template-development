@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server -d --open",
-    "build": "webpack --progress --config webpack.prod.config -p",
+    "dev": "webpack-dev-server -d --open --config webpack/dev.config",
+    "build": "webpack -p --progress --config webpack/prod.config",
     "test": "jest --watchAll --coverage"
   },
   "keywords": [],

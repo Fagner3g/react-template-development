@@ -5,7 +5,7 @@ console.log(ClassName)
 
 const ComponentDefault = () => (
     <div className={ClassName.div}>
-        <h1>Template default development</h1>
+        <h1>Template development standard</h1>
     </div>
 )
 
