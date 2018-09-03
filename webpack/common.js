@@ -1,10 +1,18 @@
-const path = require('path')
+const { join } = require('path')
+
+const paths = {
+    root: join(__dirname, '..'),
+    src: join(__dirname, '..', 'src'),
+    public: join(__dirname, '..', 'public'),
+    modules: join(__dirname, '..', 'node_modules')
+}
 
 module.exports = {
-    entry: path.join(__dirname, '..', 'src', 'index'),
+    paths,
+    entry: join(paths.src, 'index'),
 
     output: {
-        path: path.join(__dirname, '..', 'public'),
+        path: paths.public,
         filename: '[name]-[hash].js'
     },
 
@@ -16,7 +24,7 @@ module.exports = {
 
     htmlPluginConfig: (template) => ({
         title: 'Template Padrão',
-        template: path.join(__dirname, '..', 'src', 'html', template)
+        template: join(paths.src, 'html', template)
     }),
 
     jsLoader: {
@@ -41,8 +49,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            src: path.join(__dirname, '..', 'src'),
-            components: path.join(__dirname, '..', 'src', 'components')
+            src: paths.src,
+            components: join(paths.src, 'components'),
+            reducers: join(paths.src, 'redux-flow', 'reducers')
         }
     }
 }

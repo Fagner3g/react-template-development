@@ -1,7 +1,6 @@
 import React from 'react'
 
-import ClassName from './default.css'
-console.log(ClassName)
+import ClassName from './header.css'
 
 const ComponentDefault = () => (
     <div className={ClassName.div}>

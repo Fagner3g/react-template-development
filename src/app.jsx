@@ -1,10 +1,23 @@
 import React from 'react'
-import Default from 'components/default'
+import styled, { injectGlobal } from 'styled-components'
+
+import Header from 'components/header'
+import Content from 'components/content'
 
 const App = () => (
-    <div>
-        <Default />
-    </div>
+    <Container>
+        <Header />
+        <Content />
+    </Container>
 )
 
+injectGlobal`
+    html, body, div[data-js="app"]{
+        height: 100%;
+    }
+`
+
+const Container = styled.div`
+    height: 100%;
+`
 export default App
